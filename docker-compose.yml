@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: postgres_db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: limeapi
+    ports:
+      - "8080:8080"
+    environment:
+      DB_CONNECTION_URL: postgres://user:password@postgres:5432/postgres?sslmode=disable
+      ETH_NODE_URL: https://mainnet.infura.io/v3/c50a4f7b9bea4d1dad3be44a9b48c08a
+      JWT_SECRET: secret
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app  # Mount current directory to /app in the container
+    command: ["air"]  # Change this if you're not using air, or use "go run ." if running directly
+
+volumes:
+  pg_data:

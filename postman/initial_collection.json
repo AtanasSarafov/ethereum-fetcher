@@ -1,0 +1,113 @@
+{
+    "info": {
+      "name": "LimeAPI Collection",
+      "_postman_id": "1234-5678-9101-1121",
+      "description": "Collection for testing LimeAPI endpoints",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Authenticate",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n  \"username\": \"alice\",\n  \"password\": \"alice\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/lime/authenticate",
+            "host": ["{{baseUrl}}"],
+            "path": ["lime", "authenticate"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Fetch Transactions",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "AUTH_TOKEN",
+              "value": "{{authToken}}"
+            }
+          ],
+          "url": {
+            "raw": "{{baseUrl}}/lime/eth?transactionHashes=0xYourTransactionHashHere",
+            "host": ["{{baseUrl}}"],
+            "path": ["lime", "eth"],
+            "query": [
+              {
+                "key": "transactionHashes",
+                "value": "0xYourTransactionHashHere"
+              }
+            ]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Fetch User Transactions",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "key": "AUTH_TOKEN",
+              "value": "{{authToken}}"
+            }
+          ],
+          "url": {
+            "raw": "{{baseUrl}}/lime/my",
+            "host": ["{{baseUrl}}"],
+            "path": ["lime", "my"]
+          }
+        },
+        "response": []
+      },
+      {
+        "name": "Fetch All Transactions",
+        "request": {
+          "method": "GET",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "url": {
+            "raw": "{{baseUrl}}/lime/all",
+            "host": ["{{baseUrl}}"],
+            "path": ["lime", "all"]
+          }
+        },
+        "response": []
+      }
+    ],
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:8080",
+        "type": "string"
+      },
+      {
+        "key": "authToken",
+        "value": "",
+        "type": "string"
+      }
+    ]
+  }
+  

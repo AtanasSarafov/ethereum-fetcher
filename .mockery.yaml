@@ -1,0 +1,23 @@
+log-level: warn
+
+# Directory where generated mocks will be stored
+dir: ./generated/mocks
+# Filename template for generated mocks
+filename: '{{.InterfaceNameSnake}}.go'
+# Package name for the generated mocks
+outpkg: mocks
+# Name of the mock type
+mockname: '{{.InterfaceName}}'
+# Optional boilerplate file for generated mocks
+boilerplate-file: ./copyright
+# Disable version string in the generated mocks
+disable-version-string: true
+
+# List of packages and interfaces to mock
+packages:
+  ./services:
+    interfaces:
+      EthServiceInterface:
+        config:
+          mockname: CSPClient
+          filename: csp_client.go
